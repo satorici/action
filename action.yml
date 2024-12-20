@@ -1,24 +1,15 @@
-name: Satori CI - Automated Testing
-description: Assert the behavior of your software
+name: "Satori CI - Automated Testing"
+description: "Assert the behavior of your software"
 branding:
   icon: 'check-circle'
   color: 'white'
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-  satori-cli_run:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: run
-        env:
-          SATORITOKEN: ${{ secrets.SATORITOKEN }}
-        run: |
-          pip3 install satori-ci
-          satori config token $SATORITOKEN
-          satori local ./ --report
+runs:
+  using: "composite"
+  steps:
+    - name: Satori CLI
+      shell: bash
+      run: |
+        pip3 install satori-ci
+        satori config token "$SATORITOKEN"
+        satori local ./ --report
