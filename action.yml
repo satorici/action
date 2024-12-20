@@ -10,6 +10,6 @@ runs:
     - name: Satori CLI
       shell: bash
       run: |
-        pip3 install satori-ci
+        pip3 install satori-ci >> /dev/null
         satori config token "$SATORITOKEN"
         satori local ./ --report
