@@ -1,6 +1,7 @@
 name: Satori CI - Automated Testing
 description: Assert the behavior of your software
 icon: check-circle
+color: white
 
 on:
   push:
