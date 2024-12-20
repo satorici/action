@@ -35,7 +35,7 @@ jobs:
         run: |
           pip3 install satori-ci
           satori-cli config token $SATORITOKEN
-          satori-cli run ./ -s
+          satori-cli local ./ --report
 ```
 
 Click on **Commit Changes**
@@ -50,7 +50,7 @@ Click on **Commit Changes**
 
 ![](img/github_action_5.png)
 
-**6) Enter SATORITOKEN as the `Name` of your secret and paste on the `Secret` your `Team API Token` (https://www.satori-ci.com/team-settings/)**
+**6) Enter SATORITOKEN as the `Name` of your secret and paste on the `Secret` your `API Token` (https://satori.ci/user-settings/)**
 
 ![](img/github_action_6.png)
 
