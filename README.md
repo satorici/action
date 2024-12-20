@@ -2,56 +2,34 @@
 
 Satori allows you to assert if your systems and software behave as expected. With this Github Action you can include your checks as part of the local container that Github creates.
 
-## Satori CLI on Github Actions
+## How to Install and Use the Satori CI Action
 
-If you want to test part of your workflow with Satori:
+### 1. Set the `SATORITOKEN` Secret
+1. Go to your repository’s **Settings**.
+2. Navigate to **Security** > **Secrets and variables** > **Actions**.
+3. Click **New repository secret**.
+4. Name the secret `SATORITOKEN` and paste your token value from http://satori.ci/user-settings/.
+5. Click **Add secret**.
 
-**1) Go to Actions and click on New Workflow**
+### 2. Create Your Satori CI Action Workflow File
+In your repository, create `.github/workflows/satori-ci.yml`:
 
-![New Workflow Action](img/github_action_1.png)
+```name: Satori CI Test
+on: [push]
 
-**2) Click on set up a workflow yourself**
-
-![Set up a workflow](img/github_action_2.png)
-
-
-**3) Include as part of your workflow the Satori Job:**
-
-```yml
-name: Satori CI Analysis
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 jobs:
-  satori-cli_run:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: run
+      - name: Satori CI - Automated Testing
+        uses: satorici/action@v1.0.3
         env:
-          SATORITOKEN: ${{ secrets.TOKEN }}
-        run: |
-          pip3 install satori-ci
-          satori-cli config token $SATORITOKEN
-          satori-cli local ./ --report
+          SATORITOKEN: ${{ secrets.SATORITOKEN }}
 ```
 
-Click on **Commit Changes**
+### 3. Commit and Push Your Changes
+Commit the workflow file and push it to your main branch (or the desired branch). GitHub Actions will detect and run the workflow on the next push event.
 
-![Satori CI workflow](img/github_action_3.png)
-
-**4) Go to your repository `Settings`, click on `Secrets and variables` and then on `Actions`**
-
-![](img/github_action_4.png)
-
-**5) Click on `New repository secret`**
-
-![](img/github_action_5.png)
-
-**6) Enter SATORITOKEN as the `Name` of your secret and paste on the `Secret` your `API Token` (https://satori.ci/user-settings/)**
-
-![](img/github_action_6.png)
-
-Click on **`Add Secret`**
+### 4. Verify the Workflow Execution
+Check the **Actions** tab in your repository to view the logs and ensure the action ran successfully.
