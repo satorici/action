@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Satori CI - Automated Testing
-        uses: satorici/action@v1.0.3
+        uses: satorici/action@v1.0.4
         env:
           SATORITOKEN: ${{ secrets.SATORITOKEN }}
 ```
