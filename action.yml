@@ -1,4 +1,5 @@
 name: Satori CI - Automated Testing
+description: Assert the behavior of your software
 
 on:
   push:
